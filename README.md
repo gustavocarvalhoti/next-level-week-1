@@ -30,6 +30,12 @@ npm install cors -D             <- Para acessar de outro projeto
 ```
 npx create-react-app web --template=typescript  <- Cria um projeto React/Typescript
 cd web
+npm install react-icons
+npm install react-router-dom    <- Rotas
+npm install @types/react-router-dom -D
+npm install leaflet react-leaflet
+npm install @types/react-leaflet -D
+npm install axios
 ```
 
 ## Start
@@ -41,7 +47,16 @@ npm run knex:migrate                <- Roda as migrations
 npm run knex:seed                   <- Cria a massa de dados
 npm run dev                         <- Pelo package
 OBS: transpileOnly --ignore-watch   <- Deixa mais rápido ainda a transpilação
+yarn dev                            <- Mais fácil
 
 Frontend
 npm start
+yarn start
+```
+
+## Geral
+```
+JSX - O arquivo .jsx aceita js e tags HTML.
+https://leafletjs.com/ - Mapa opensource
+https://react-leaflet.js.org/
 ```
