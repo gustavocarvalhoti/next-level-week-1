@@ -4,7 +4,7 @@
 React
 React Native
 Node v12.17.0
-npm  6.14.4
+npm    6.14.4
 TypeScript                      <- Deixar claro a estrutura das informações
 Knex.js                         <- Linguagem unificada para os DB - Query builder
 Sqlite
@@ -64,14 +64,16 @@ npm run knex:migrate                <- Roda as migrations
 npm run knex:seed                   <- Cria a massa de dados
 npm run dev                         <- Pelo package
 OBS: transpileOnly --ignore-watch   <- Deixa mais rápido ainda a transpilação
-yarn dev                            <- Mais fácil
+yarn dev                            <- Eu prefiro essa
 
 Frontend
 npm start
 yarn start
+yarn dev                            <- Eu prefiro essa
 
 mobile
 yarn start
+yarn dev                            <- Eu prefiro essa
 ```
 
 ## Geral
