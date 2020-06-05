@@ -87,4 +87,15 @@ yarn dev                            <- Eu prefiro essa
 JSX - O arquivo .jsx aceita js e tags HTML.
 https://leafletjs.com/ - Mapa opensource
 https://react-leaflet.js.org/
+
+Indicação de Deploy
+Back-end:
+Heroku - bom para testar
+Digital Ocean - Com poucos usuários utilizando
+AWS - Cloud - Azure - Quando a aplição cresce
+
+Frontend
+Netilify - Tem um plano gratuito muito bom
+Vercel   - Bem automatizado tb     
+Amazon S3 - Cloud - Quando a aplição cresce
 ```
