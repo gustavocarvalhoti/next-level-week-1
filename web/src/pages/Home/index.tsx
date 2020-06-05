@@ -5,6 +5,9 @@ import logo from '../../assets/logo.svg';
 import {Link} from "react-router-dom";
 
 const Home = () => {
+    /*****************************************************************************
+     HTML
+     *****************************************************************************/
     return (
         <div id="page-home">
             <div className="content">

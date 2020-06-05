@@ -7,41 +7,51 @@ import {Map, Marker, TileLayer} from 'react-leaflet';
 import api from "../../services/api";
 import axios from 'axios';
 import {LeafletMouseEvent} from 'leaflet';
+import Dropzone from "../../components/Dropzone";
+
+/*****************************************************************************
+ INTERFACE
+ *****************************************************************************/
+interface Item {
+    id: number;
+    title: string;
+    image_url: string;
+}
+
+interface IbgeUfResponse {
+    sigla: string;
+}
+
+interface IbgeCityResponse {
+    nome: string;
+}
 
 const CreatePoint = () => {
-    interface Item {
-        id: number;
-        title: string;
-        image_url: string;
-    }
 
-    interface IbgeUfResponse {
-        sigla: string;
-    }
+    const history = useHistory();
 
-    interface IbgeCityResponse {
-        nome: string;
-    }
-
-    // <Item[]> - Do tipo Item
+    /*****************************************************************************
+     STATE
+     *****************************************************************************/
+        // <Item[]> - Do tipo Item
     const [items, setItems] = useState<Item[]>([]);
     const [ufs, setUfs] = useState<string[]>([]);
     const [cities, setCities] = useState<string[]>([]);
-
     const [selectedUf, setSelectedUf] = useState<string>('0');
     const [selectedCity, setSelectedCity] = useState<string>('0');
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
-
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         whatsapp: '',
     });
+    const [selectedFile, setSelectedFile] = useState<File>();
 
-    const history = useHistory();
-
+    /*****************************************************************************
+     EFFECT
+     *****************************************************************************/
     useEffect(() => {
         // Mostra de onde o usuário acessa o computador
         navigator.geolocation.getCurrentPosition(position => {
@@ -49,15 +59,12 @@ const CreatePoint = () => {
             setInitialPosition([latitude, longitude]);
         })
     }, []);
-
-    // É desparada uma unica vez, mounted
-    // Para executar ao alterar um valor, só passar o valor no lugar do []
+    // É desparada uma unica vez, mounted, Para executar ao alterar um valor, só passar o valor no lugar do []
     useEffect(() => {
         api.get('items').then(response => {
             setItems(response.data);
         });
     }, []);
-
     useEffect(() => {
         axios
             .get<IbgeUfResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
@@ -66,7 +73,6 @@ const CreatePoint = () => {
                 setUfs(ufInitials);
             });
     }, []);
-
     // Carregar quando a UF mudar
     useEffect(() => {
         if (selectedUf === '0') return;
@@ -79,6 +85,9 @@ const CreatePoint = () => {
             });
     }, [selectedUf]);
 
+    /*****************************************************************************
+     FUNCTION
+     *****************************************************************************/
     function handleSelectUf(event: ChangeEvent<HTMLSelectElement>) {
         const uf = event.target.value;
         setSelectedUf(uf);
@@ -120,10 +129,22 @@ const CreatePoint = () => {
         const city = selectedCity;
         const [latitude, longitude] = selectedPosition;
         const items = selectedItems;
+        const image = selectedFile;
 
-        const data = {
-            name, email, whatsapp, uf, city, latitude, longitude, items
-        }
+        // Enviar um MultiPart por causa do file
+        const data = new FormData();
+
+        data.append('name', name);
+        data.append('email', email);
+        data.append('whatsapp', whatsapp);
+        data.append('uf', uf);
+        data.append('city', city);
+        data.append('latitude', String(latitude));
+        data.append('longitude', String(longitude));
+        data.append('items', items.join(","));
+
+        if (selectedFile)
+            data.append('image', selectedFile);
 
         await api.post('/points', data);
 
@@ -133,6 +154,9 @@ const CreatePoint = () => {
         history.push('/');
     }
 
+    /*****************************************************************************
+     HTML
+     *****************************************************************************/
     return (
         <div id="page-create-point">
             <header>
@@ -144,6 +168,8 @@ const CreatePoint = () => {
             </header>
             <form onSubmit={handleSubmit}>
                 <h1>Cadastro do<br/> ponto de coleta</h1>
+                {/*Enviando uma função para o Dropzone*/}
+                <Dropzone onFileUploaded={setSelectedFile}/>
                 <fieldset>
                     <legend>
                         <h2>Dados</h2>

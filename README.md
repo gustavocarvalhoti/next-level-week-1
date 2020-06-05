@@ -8,6 +8,7 @@ npm    6.14.4
 TypeScript                      <- Deixar claro a estrutura das informações
 Knex.js                         <- Linguagem unificada para os DB - Query builder
 Sqlite
+Upload de imagens
 ```
 
 ## Install - Backend
@@ -23,7 +24,11 @@ npm install ts-node-dev -D      <- Hotdeploy
 npm install knex                <- Igual o JPA
 npm install sqlite3             <- DB       
 npx knex migrate:latest --knexfile knexfile.ts migrate:latest   <- Configura as migrations   
-npm install cors -D             <- Para acessar de outro projeto   
+npm install cors -D             <- Para acessar de outro projeto  
+npm install multer              <- Upload de arquivos
+npm install @types/multer -D
+npm install celebrate           <- Validar input
+npm install @types/hapi__joi -D
 ```
 
 ## Install - Frontend
@@ -36,6 +41,7 @@ npm install @types/react-router-dom -D
 npm install leaflet react-leaflet
 npm install @types/react-leaflet -D
 npm install axios
+npm install react-dropzone
 ```
 
 ## Install - Mobile
