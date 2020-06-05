@@ -38,6 +38,23 @@ npm install @types/react-leaflet -D
 npm install axios
 ```
 
+## Install - Mobile
+```
+npm install -g expo-cli         <- Instalar o Expo para rodar os comandos mobile, global, no PC
+expo init mobile                <- Cria o projeto
+blank (TypeScript)
+expo install expo-font @expo-google-fonts/ubuntu @expo-google-fonts/roboto
+yarn add @react-navigation/native
+yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npm install @react-navigation/stack
+expo install react-native-maps
+expo install constants
+expo install react-native-svg   <- Para ler SVG
+npm install axios
+expo install expo-location
+expo install expo-mail-composer
+```
+
 ## Start
 ```
 Backend
@@ -51,6 +68,9 @@ yarn dev                            <- Mais fácil
 
 Frontend
 npm start
+yarn start
+
+mobile
 yarn start
 ```
 
